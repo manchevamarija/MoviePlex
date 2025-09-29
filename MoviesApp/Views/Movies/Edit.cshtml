@@ -1,0 +1,61 @@
+@model EditMovieViewModel
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow-lg p-4 form-container" style="max-width: 600px; width: 100%;">
+        <h2 class="mb-4 text-uppercase fw-bold" style="font-style: normal; color: #ff4444; font-weight: 700;">Уреди го филмот</h2>
+
+        <form asp-action="Edit" method="post" class="needs-validation" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CreatedAt" />
+
+            <div class="mb-3 text-start">
+                <label asp-for="Title" class="form-label">Наслов</label>
+                <input asp-for="Title" class="form-control" required />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 text-start">
+                <label asp-for="Year" class="form-label">Година</label>
+                <input asp-for="Year" type="number" class="form-control" required min="1900" max="2100" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 text-start">
+                <label asp-for="Genre" class="form-label">Жанр</label>
+                <input asp-for="Genre" class="form-control" />
+            </div>
+
+            <div class="mb-3 text-start">
+                <label asp-for="Plot" class="form-label">Краток опис</label>
+                <textarea asp-for="Plot" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3 text-start">
+                <label asp-for="PosterUrl" class="form-label">Poster URL</label>
+                <input asp-for="PosterUrl" class="form-control" />
+            </div>
+
+            <div class="mb-3 text-start">
+                <label asp-for="Note" class="form-label">Белешка</label>
+                <textarea asp-for="Note" class="form-control" rows="2"></textarea>
+            </div>
+            
+            <div class="mb-3 text-start">
+                <label asp-for="Status" class="form-label">Статус</label>
+                <select asp-for="Status" class="form-select"
+                        asp-items="Html.GetEnumSelectList<MoviesApp.Models.WatchStatus>()">
+                </select>
+            </div>
+
+            <div class="d-grid gap-2 mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">Зачувај</button>
+                <a asp-action="Index" asp-controller="Movies" class="btn btn-secondary btn-lg">Назад кон листата</a>
+            </div>
+        </form>
+
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+        }
+    </div>
+</div>
