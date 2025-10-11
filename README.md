@@ -18,4 +18,4 @@ MoviePlex MVC is a web application built with ASP.NET Core MVC that allows users
 - SQL Server
 - Razor Views
 - LocalDB
-- OMDb API integration
+
