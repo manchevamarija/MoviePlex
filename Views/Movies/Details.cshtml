@@ -1,0 +1,77 @@
+@model MoviesApp.Models.Movie
+@using MoviesApp.Models
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="details-card my-5 d-flex flex-column">
+    <div class="row g-4 align-items-start flex-grow-1">
+        <div class="col-lg-6 d-flex justify-content-center align-items-start">
+            <img src="@(!string.IsNullOrEmpty(Model.PosterUrl) ? Model.PosterUrl : Url.Content("~/images/placeholder.png"))"
+                 alt="@Model.Title Poster"
+                 class="img-fluid rounded shadow"
+                 style="max-width:400px; max-height:600px; object-fit:cover;" />
+        </div>
+
+        <div class="col-lg-6 d-flex flex-column justify-content-center text-center">
+            <h1 class="mb-4" style="color:#ff4444; font-weight:800; font-size:2.5rem;">
+                @Model.Title 
+                @if (Model.Year.HasValue)
+                {
+                    <span>(@Model.Year)</span>
+                }
+
+                @if (Model.WatchStatus == WatchStatus.Watched)
+                {
+                    <span class="badge bg-success ms-2">Гледан</span>
+                }
+                else if (Model.WatchStatus == WatchStatus.Watching)
+                {
+                    <span class="badge bg-info text-dark ms-2">Во тек</span>
+                }
+                else if (Model.WatchStatus == WatchStatus.Favorite)
+                {
+                    <span class="badge bg-danger ms-2">Омилен</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary ms-2">Не е гледан</span>
+                }
+            </h1>
+
+            @if (!string.IsNullOrEmpty(Model.Genre))
+            {
+                <p style="font-size:1.2rem; color:#ddd; margin-bottom:15px;">
+                    <strong>Жанр:</strong> @Model.Genre
+                </p>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Plot))
+            {
+                <p style="font-size:1.1rem; color:#ccc; line-height:1.6; max-width:90%; margin:0 auto;">
+                    <strong>Опис:</strong> @Model.Plot
+                </p>
+            }
+        </div>
+    </div>
+
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <div class="mt-4 text-center">
+            <form asp-action="UpdateWatchStatus" asp-route-id="@Model.Id" method="post" class="d-inline-block">
+                <select name="status" class="form-select d-inline w-auto">
+                    <option value="0" selected="@(Model.WatchStatus == WatchStatus.NotWatched)">-- Watch Status --</option>
+                    <option value="1" selected="@(Model.WatchStatus == WatchStatus.Watching)">Watching</option>
+                    <option value="2" selected="@(Model.WatchStatus == WatchStatus.Watched)">Watched</option>
+                    <option value="3" selected="@(Model.WatchStatus == WatchStatus.Favorite)">Favorite</option>
+                </select>
+                <button type="submit" class="btn btn-primary btn-sm ms-2">Save</button>
+            </form>
+        </div>
+    }
+
+    <div class="mt-4 text-center">
+        <a asp-action="Index" class="btn btn-secondary btn-lg">Назад кон листата</a>
+    </div>
+</div>

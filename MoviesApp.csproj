@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <UserSecretsId>70988b9b-54ca-4b2f-8bdf-0e4e5c8cf2b1</UserSecretsId>
+  </PropertyGroup>
+ <ItemGroup>
+  <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    <PrivateAssets>all</PrivateAssets>
+  </PackageReference>
+  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+
+
+</ItemGroup>
+
+</Project>

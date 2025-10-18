@@ -1,0 +1,71 @@
+@model MoviesApp.Models.CineplexxMovie
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="details-card my-5">
+    <div class="row g-4 align-items-start">
+        <div class="col-lg-6">
+            <div class="text-center mb-4">
+                <img src="@(!string.IsNullOrEmpty(Model.PosterImage) ? Model.PosterImage : Url.Content("~/images/placeholder.png"))"
+                     alt="@Model.Title Poster"
+                     class="img-fluid rounded shadow"
+                     style="max-width:400px; max-height:600px; object-fit:cover;" />
+            </div>
+
+            <h2 class="card-title">@Model.Title</h2>
+
+            @if (!string.IsNullOrEmpty(Model.DescriptionCalculated))
+            {
+                <p class="card-text"><strong>Опис:</strong> @Model.DescriptionCalculated</p>
+            }
+
+            @if (Model.Actors != null && Model.Actors.Any())
+            {
+                <p class="card-text"><strong>Актери:</strong> @string.Join(", ", Model.Actors)</p>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Rating))
+            {
+                <p class="card-text"><strong>Категорија:</strong> @Model.Rating</p>
+            }
+        </div>
+
+        <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
+            @if (Model.Trailers != null && Model.Trailers.Any())
+            {
+                <div class="w-100">
+                    <h3 class="mb-3 text-center" style="color:#ff4444; font-weight:700;">Trailer за филмот:</h3>
+                    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+                        <iframe src="@Model.Trailers.First().UniversalPlayerUrl"
+                                title="Trailer"
+                                allowfullscreen
+                                style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;">
+                        </iframe>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-secondary text-center w-100">
+                    Trailer моментално не е достапен.
+                </div>
+            }
+        </div>
+    </div>
+
+@if (User.Identity != null && User.Identity.IsAuthenticated)
+{
+    <form asp-action="AddFromCineplexx" asp-route-id="@Model.Id" method="post" class="text-center mt-3">
+        <button type="submit" class="btn btn-primary btn-lg">
+            ➕ Додади во моја листа
+        </button>
+    </form>
+}
+
+
+    <div class="mt-4 text-center">
+        <a asp-action="Index" class="btn btn-secondary btn-lg">Назад кон листата</a>
+    </div>
+</div>

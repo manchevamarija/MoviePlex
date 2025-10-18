@@ -1,0 +1,25 @@
+@model MoviesApp.Models.Movie
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="details-card">
+    <div class="row g-4 align-items-start">
+        <div class="col-md-4 text-center">
+            <img src="@(!string.IsNullOrEmpty(Model.PosterUrl) ? Model.PosterUrl : Url.Content("~/images/placeholder.png"))"
+                 alt="@Model.Title Poster"
+                 class="img-fluid" />
+        </div>
+
+        <div class="col-md-8 d-flex flex-column justify-content-center">
+            <h2 class="card-title">@Model.Title (@Model.Year)</h2>
+            <p class="card-text"><strong>Жанр:</strong> @Model.Genre</p>
+            <p class="card-text"><strong>Опис:</strong> @Model.Plot</p>
+
+              <div class="mt-4 text-center">
+        <a asp-action="Index" class="btn btn-secondary btn-lg">Назад кон листата</a>
+    </div>
+        </div>
+    </div>
+</div>
