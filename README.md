@@ -30,6 +30,15 @@ This integration enriches the app with **live cinema data**, allowing users to b
 
 ---
 
+## Use Case Diagram
+
+The following diagram presents the main use cases of the MoviePlex MVC application, showing how users interact with the system to search, view, save, and manage movies, as well as how the application communicates with external APIs.
+
+![Use Case Diagram](screenshots/Screenshot_2026-01-21_165708.png)
+
+---
+
+
 ##  Technologies
 
 - **ASP.NET Core MVC**  
